@@ -17,21 +17,21 @@ kubectl drain <node_name> --ignore-daemonsets
 ```
 shh user@node_name
 ```
-### Stop kubelet
+### Stop kubelet and remove Docker
 
 ```
 systemctl stop kubelet
 systemctl stop docker
 apt remove --purge docker-ce docker-cli
 ```
-### Edit containerD config file
+### Edit containerD config file and restart
 
 ```
 vi /etc/containerd/config.toml
 >>> comment disabled_plugins = ["cri"]
 systemctl restart containerd
 ```
-### ContainerD Initiate
+### Kubelet restart
 
 ```
 vi /var/lib/kubelet/kubeadm-flags.env and edit
